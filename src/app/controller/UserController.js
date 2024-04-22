@@ -180,10 +180,8 @@ class UserController {
       .then(async (user) => {
         if (user.avatar) {
           const idAvatar = user.avatar.split("id=")[1];
-          console.log("id avatar cũ: ", idAvatar);
           if (idAvatar) {
             await drive().files.delete({ fileId: idAvatar });
-            console.log("Xóa ảnh cũ thành công");
           }
         }
       })
@@ -192,8 +190,6 @@ class UserController {
           { _id: req.session.idUser },
           { avatar: `https://drive.google.com/thumbnail?id=${req.fileId}` }
         ).then(() => {
-          console.log("avata mới: ", req.fileId);
-          console.log("Thay đổi ảnh đại diện thành công");
           req.flash("message", {
             type: "success",
             message: "Thay đổi ảnh đại diện thành công",
