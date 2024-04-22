@@ -1,0 +1,227 @@
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div
+              class="col-md-4 gradient-custom text-center"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;"
+            >
+
+              <img
+                src="{{user.avatar}}"
+                id="avatar"
+                alt="Avatar"
+                class="img-fluid my-5"
+                style="width: 80px;"
+              />
+              <form
+                hidden
+                action="avatar?_method=PATCH"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <input type="file" name="avatar" id="inpAvatar" />
+                <button
+                  id="btnAvatar"
+                  type="submit"
+                  class="btn btn-info"
+                ></button>
+              </form>
+              <h5>{{user.hoten}}</h5>
+              <p>{{showRole user.role}}</p>
+              <a href="/logout">Đăng xuất</a>
+              <i class="far fa-edit mb-5"></i>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4" />
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Giới tính</h6>
+                    <p class="text-muted">
+                      {{showGioiTinh user.gioitinh}}
+                    </p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Ngày sinh</h6>
+                    <p class="text-muted">{{user.ngaysinh}}</p>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <h6>Quê quán</h6>
+                    <p class="text-muted">{{user.quequan}}</p>
+                  </div>
+                  <div class="col-4 mb-3">
+                    <h6>Điểm hội viên</h6>
+                    <p class="text-muted">{{user.userScore}}</p>
+                  </div>
+                  <div class="col-4 mb-3">
+                    <h6>Điểm admin</h6>
+                    <p class="text-muted">{{user.adminScore}}</p>
+                  </div>
+                  <div class="col-4 mb-3">
+                    <h6>Trạng thái</h6>
+                    <p class="text-muted">{{user.status}}</p>
+                  </div>
+                  <div class="col-12 d-flex mb-3 justify-content-between gap-1">
+                    <button
+                      class="btn btn-info"
+                      data-bs-toggle="modal"
+                      data-bs-target="#doiMKModal"
+                    >Đổi mật khẩu</button>
+                    <button
+                      class="btn btn-info"
+                      data-bs-toggle="modal"
+                      data-bs-target="#doiTTModal"
+                    >Cập nhật thông tin</button>
+                    {{#if (compare user.role 1)}}
+                      <a href="/evaluate" class="btn btn-info">Nộp bảng đánh giá</a>
+                    {{else}}
+                      <a href="/admin/member" class="btn btn-info">Danh sách hội
+                        viên</a>
+                    {{/if}}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{! modal thay đổi mật khẩu }}
+<div class="modal fade" id="doiMKModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="doiMKModalLabel">Thay đổi mật khẩu</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="password?_method=PATCH" method="post">
+          <div class="mb-3">
+            <label for="oldPassword" class="col-form-label">Mật khẩu cũ</label>
+            <input
+              type="text"
+              class="form-control"
+              id="oldPassword"
+              name="oldPassword"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="newPassword" class="col-form-label">Mật khẩu mới</label>
+            <input
+              type="text"
+              class="form-control"
+              id="newPassword"
+              name="newPassword"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="repeatNewPassword" class="col-form-label">Nhập lại mật
+              khẩu mới</label>
+            <input
+              type="text"
+              class="form-control"
+              id="repeatNewPassword"
+              name="repeatNewPassword"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Close</button>
+            <button type="submit" class="btn btn-primary">Thay đổi mật khẩu</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{! modal thay đổi thông tin }}
+<div class="modal fade" id="doiTTModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="doiMKModalLabel">Thay đổi mật khẩu</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="profile?_method=PATCH" method="post">
+          <div class="mb-3">
+            <label for="hoten" class="col-form-label">Họ tên</label>
+            <input
+              type="text"
+              class="form-control"
+              id="hoten"
+              name="hoten"
+              value="{{user.hoten}}"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="gioitinh" class="col-form-label">Giới tính</label>
+            <select class="form-select" id="gioitinh" name="gioitinh" required>
+              <option value="0" {{selectGioiTinh user.gioitinh 0}}>Nam</option>
+              <option value="1" {{selectGioiTinh user.gioitinh 1}}>Nữ</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="ngaysinh" class="col-form-label">Ngày sinh</label>
+            <input
+              type="date"
+              class="form-control"
+              id="ngaysinh"
+              name="ngaysinh"
+              value="{{user.ngaysinh}}"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="quequan" class="col-form-label">Quê quán</label>
+            <input
+              type="text"
+              class="form-control"
+              id="quequan"
+              name="quequan"
+              value="{{user.quequan}}"
+              required
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Close</button>
+            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{! script thay đổi avatar }}
+<script>
+  $('#avatar').click(function () { $('#inpAvatar').click() })
+  $('#inpAvatar').change(function () { $('#btnAvatar').click()})
+</script>

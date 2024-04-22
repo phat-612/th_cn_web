@@ -1,0 +1,32 @@
+<div class="container-sm w-100">
+  <h1 class="text-center text-uppercase">danh sách hội viên</h1>
+  <div>
+    <form action="/admin/allowEvaluate" method="post">
+      <button class="btn btn-primary" type="submit">Cho phép đánh giá</button>
+    </form>
+
+  </div>
+  <table class="table m-auto w-75">
+    <thead>
+      <tr class="text-center">
+        <th scope="col" class="col-1">STT</th>
+        <th scope="col" class="col-3">Họ tên</th>
+        <th scope="col" class="col-1">Điểm hội viên</th>
+        <th scope="col" class="col-1">Điểm admin</th>
+        <th scope="col" class="col-1">Chấm điểm</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each members}}
+        <tr>
+          <th scope="row" class="text-center">{{showSTT @key}}</th>
+          <td>{{this.hoten}}</td>
+          <td class="text-center">{{this.userScore}}</td>
+          <td class="text-center">{{this.adminScore}}</td>
+          <td class="text-center"><a href="/admin/evaluate?id={{this._id}}">Chấm
+              điểm</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

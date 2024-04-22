@@ -1,0 +1,171 @@
+<section class="">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                {{#if errorMessage}}
+                  <p
+                    class="text-center h4 fw-bold text-danger"
+                  >{{errorMessage}}</p>
+                {{/if}}
+                <form class="mx-1 mx-md-4" action="/register" method="post">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input
+                        type="text"
+                        id="username"
+                        class="form-control"
+                        name="username"
+                        value="{{user.username}}"
+                        required
+                      />
+                      <label class="form-label" for="username">Tài khoản</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input
+                        type="text"
+                        id="hoten"
+                        class="form-control"
+                        name="hoten"
+                        value="{{user.hoten}}"
+                        required
+                      />
+                      <label class="form-label" for="hoten">Họ và tên</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select
+                        class="form-select"
+                        id="gioitinh"
+                        aria-label="Default select example"
+                        name="gioitinh"
+                        required
+                      >
+                        <option value="0" {{#if (compare user.gioitinh 0)}}selected{{/if}}>Nam</option>
+                        <option value="1" {{#if (compare user.gioitinh 1)}}selected{{/if}}>Nữ</option>
+                      </select>
+                      <label class="form-label" for="gioitinh">Giới tính</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input
+                        type="date"
+                        id="ngaysinh"
+                        class="form-control"
+                        name="ngaysinh"
+                        value="{{user.ngaysinh}}"
+                        required
+                      />
+                      <label class="form-label" for="ngaysinh">Năm sinh</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input
+                        type="text"
+                        id="quequan"
+                        class="form-control"
+                        name="quequan"
+                        value="{{user.quequan}}"
+                        required
+                      />
+                      <label class="form-label" for="quequan">Quê quán</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        name="password"
+                        required
+                      />
+                      <label class="form-label" for="password">Mật khẩu</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input
+                        type="password"
+                        id="repeatPassword"
+                        class="form-control"
+                        name="repeatPassword"
+                        required
+                      />
+                      <label class="form-label" for="repeatPassword">Nhập lại
+                        mật khẩu</label>
+                      <p id="errorPassword" class="d-none text-danger">Mật khẩu
+                        không khớp</p>
+                    </div>
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input
+                      class="form-check-input me-2"
+                      type="checkbox"
+                      value=""
+                      id="agreement"
+                      required
+                    />
+                    <label class="form-check-label" for="agreement">
+                      I agree all statements in
+                      <a href="#!">Terms of service</a>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-lg"
+                    >Register</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div
+                class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
+              >
+
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid"
+                  alt="Sample image"
+                />
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $(document).ready(function () { $('#repeatPassword').on('keyup', function () {
+  if ($('#password').val() == $('#repeatPassword').val()) {
+  $('#errorPassword').addClass('d-none'); } else {
+  $('#errorPassword').removeClass('d-none'); } }); }); $('form').submit(function
+  (e) { if ($('#password').val() != $('#repeatPassword').val()) {
+  e.preventDefault(); $('#errorPassword').removeClass('d-none'); } })
+</script>

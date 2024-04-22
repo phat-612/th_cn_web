@@ -1,0 +1,27 @@
+###
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin",
+    "repeatPassword": "admin",
+    "hoten": "Nguyen Van Admin",
+    "gioitinh": 0,
+    "ngaysinh": "1999-01-01",
+    "quequan": "Ha Noi",
+    "role": 0
+}
+###
+POST http://localhost:3001/admin/standard
+Content-Type: application/json
+
+{
+    "standards": ["Chăm chỉ (bạn đi đến phòng tập mỗi ngày)", "Đạt được mục tiêu cá nhân (tăng cường sức khỏe, giảm cân,...)", "Tuân thủ các quy tắc an toàn khi tập luyện", "Thái độ luyện tập trong quá trình tập luyện", "Tôn trọng, lịch sự với nhân viên và mọi người", "Khả năng điều chỉnh, đa dạng hóa chương trình luyện tập", "Ăn uống lành mạnh", "Giúp đỡ mọi người trong quá trình luyện tập", "Có khả năng học hỏi và tiếp thu kiến thức mới", "Tham gia các hoạt động của phòng tập"]
+}
+
+###
+POST http://localhost:3000/test
+Content-Type: application/x-www-form-urlencoded
+
+details[0][reasonAndPrice][0][price]=100000&details[0][reasonAndPrice][0][reason]=Đau cơ&details[0][reasonAndPrice][1][price]=200000&details[0][reasonAndPrice][1][reason]=Đau khớp&details[1][reasonAndPrice][0][price]=100000&details[1][reasonAndPrice][0][reason]=Đau cơ&details[1][reasonAndPrice][1][price]=200000&details[1][reasonAndPrice][1][reason]=Đau khớp
