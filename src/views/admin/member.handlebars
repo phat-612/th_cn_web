@@ -1,0 +1,46 @@
+<div class="container">
+  <h1 class="text-center">Quản lý tài khoản</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="col-1 text-center">STT</th>
+        <th scope="col">Tài khoản</th>
+        <th scope="col">Họ tên</th>
+        <th scope="col" class="text-center">Giới tính</th>
+        <th scope="col" class="text-center">Ngày sinh</th>
+        <th scope="col">Quê quán</th>
+        <th scope="col" class="text-center">Quyền</th>
+        <th scope="col" class="text-center">Trạng thái</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td class="align-content-center text-center">{{showSTT @index}}</td>
+          <td class="align-content-center">{{username}}</td>
+          <td class="align-content-center">{{name}}</td>
+          <td class="align-content-center text-center">{{showGioiTinh
+              gender
+            }}</td>
+          <td class="align-content-center text-center">{{formatDate
+              birthday
+              "DD/MM/YYYY"
+            }}</td>
+          <td class="align-content-center">{{hometown}}</td>
+          <td class="align-content-center">
+            <select class="form-select text-center" data-bs-idUser="{{_id}}">
+              <option value="0" {{selectedSelect role 0}}>Quản trị viên</option>
+              <option value="1" {{selectedSelect role 1}}>Người dùng</option>
+            </select>
+          </td>
+          <td class="align-content-center text-center"><input
+              type="checkbox"
+              class="form-check-input"
+              value="{{_id}}"
+              {{checkCheckbox active}}
+            /></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

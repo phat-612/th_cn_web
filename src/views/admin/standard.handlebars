@@ -1,0 +1,198 @@
+<div class="container">
+  <h1 class="text-center">Quản lý tiêu chí đánh giá</h1>
+  <button
+    class="btn btn-primary float-end"
+    data-bs-toggle="modal"
+    data-bs-target="#standardModal"
+    data-bs-action="add"
+  >Thêm tiêu chuẩn</button>
+  <table class="table">
+    <thead>
+      <tr class="fs-4">
+        <th scope="col">Tiêu chuẩn</th>
+        <th scope="col">Tiêu chí</th>
+        <th scope="col">Điểm</th>
+        <th scope="col">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each standards}}
+        <tr class="fw-bold fs-5">
+          <td>{{name}}</td>
+          <td></td>
+          <td>{{getTotalScore criterias}}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#criteriaModal"
+              data-bs-idStandard="{{_id}}"
+              data-bs-action="add"
+              data-bs-nameStandard="{{name}}"
+            >Thêm tiêu chí</button>
+            <button
+              class="btn btn-warning"
+              data-bs-toggle="modal"
+              data-bs-target="#standardModal"
+              data-bs-idStandard="{{_id}}"
+              data-bs-action="edit"
+              data-bs-nameStandard="{{name}}"
+            >Sửa</button>
+            <form
+              class="formDelete d-inline-block"
+              action="/api/standard?idStandard={{_id}}&_method=DELETE"
+              method="post"
+            >
+              <button type="submit" class="btn btn-danger">Xóa</button></form>
+          </td>
+        </tr>
+        {{#each criterias}}
+          <tr>
+            <td></td>
+            <td>{{name}}</td>
+            <td>{{score}}</td>
+            <td>
+              <button
+                class="btn btn-warning"
+                data-bs-toggle="modal"
+                data-bs-target="#criteriaModal"
+                data-bs-action="edit"
+                data-bs-idCriteria="{{_id}}"
+                data-bs-name="{{name}}"
+                data-bs-score="{{score}}"
+              >Sửa</button>
+              <form
+                class="formDelete d-inline-block"
+                action="/api/criteria?idCriteria={{_id}}&_method=DELETE"
+                method="post"
+              >
+                <button type="submit" class="btn btn-danger">Xóa</button></form>
+            </td>
+          </tr>
+        {{/each}}
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>
+{{! modal tiêu chuẩn }}
+<div
+  class="modal fade"
+  id="standardModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="standardModalLabel">Thêm tiêu chuẩn</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="standardForm" method="post">
+          <div class="mb-3">
+            <label for="name" class="col-form-label">Tên tiêu chuẩn</label>
+            <input type="text" class="form-control" id="name" name="name" />
+          </div>
+          <div class="float-end">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Close</button>
+            <button
+              type="submit"
+              id="btnSubmitStandardForm"
+              class="btn btn-primary"
+            ></button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{! modal tiêu chí }}
+<div
+  class="modal fade"
+  id="criteriaModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="criteriaModalLabel">Thêm tiêu chí</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="criteriaForm" method="post">
+          <input type="text" id="idStandard" name="idStandard" hidden />
+          <h2 id="nameStandard"></h2>
+          <div id="areaInputCriteria">
+            <div class="row">
+              <div class="col mb-2">
+                <label for="nameCriteria" class="col-form-label">Tên tiêu chí</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nameCriteria"
+                  name="criterias[0][name]"
+                  required
+                />
+              </div>
+              <div class="col mb-2">
+                <label for="score" class="col-form-label">Điểm</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="score"
+                  name="criterias[0][score]"
+                  required
+                />
+              </div>
+              <div class="col-2 mb-2 align-content-end text-center">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  onclick="deleteRowInput(event)"
+                >Xóa</button>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button
+              type="button"
+              id="addInputCriteria"
+              class="btn btn-primary"
+            >Thêm mục</button>
+          </div>
+          <div class="float-end mt-3">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Close</button>
+            <button
+              type="submit"
+              id="btnSubmitCriteriaForm"
+              class="btn btn-primary"
+            >Thêm tiêu chí</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

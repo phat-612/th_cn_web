@@ -1,6 +1,7 @@
+const moment = require("moment");
 module.exports = {
   showGioiTinh: function (gioitinh) {
-    if (gioitinh == 0) {
+    if (gioitinh == 0 || !gioitinh) {
       return "Nam";
     }
     return "Nữ";
@@ -17,6 +18,12 @@ module.exports = {
   },
   showSTT: function (value) {
     return value + 1;
+  },
+  checkCheckbox: function (value) {
+    return !!value ? "checked" : "";
+  },
+  selectedSelect: function (value, check) {
+    return value == check ? "selected" : "";
   },
   compare: (a, b) => a == b,
   statusToast: (type) => {
@@ -35,13 +42,17 @@ module.exports = {
     role == 0
       ? "/admin/evaluate?_method=PATCH"
       : "/user/evaluate?_method=PATCH",
-  checkCheckbox: (idStandard, user) => {
-    const standard = user.find(
-      (item) => item.idStandard.toString() == idStandard.toString()
-    );
-    if (standard) {
-      return standard.check ? "checked" : "";
-    }
-    return "";
+
+  formatDate: function (date, format) {
+    const dateMoment = moment(date);
+    return dateMoment.format(format);
+  },
+  // view Standard
+  getTotalScore: (criterias) => {
+    return criterias.reduce((total, criteria) => total + criteria.score, 0);
+  },
+  // end view Standard
+  consoleHandlebars: (value) => {
+    console.log(value);
   },
 };

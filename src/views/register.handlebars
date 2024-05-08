@@ -13,11 +13,12 @@
                     class="text-center h4 fw-bold text-danger"
                   >{{errorMessage}}</p>
                 {{/if}}
-                <form class="mx-1 mx-md-4" action="/register" method="post">
+                <form class="mx-1 mx-md-4" action="/api/register" method="post">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="username">Tài khoản</label>
                       <input
                         type="text"
                         id="username"
@@ -26,71 +27,71 @@
                         value="{{user.username}}"
                         required
                       />
-                      <label class="form-label" for="username">Tài khoản</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="name">Họ và tên</label>
                       <input
                         type="text"
-                        id="hoten"
+                        id="name"
                         class="form-control"
-                        name="hoten"
-                        value="{{user.hoten}}"
+                        name="name"
+                        value="{{user.name}}"
                         required
                       />
-                      <label class="form-label" for="hoten">Họ và tên</label>
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="gender">Giới tính</label>
                       <select
                         class="form-select"
-                        id="gioitinh"
+                        id="gender"
                         aria-label="Default select example"
-                        name="gioitinh"
+                        name="gender"
                         required
                       >
-                        <option value="0" {{#if (compare user.gioitinh 0)}}selected{{/if}}>Nam</option>
-                        <option value="1" {{#if (compare user.gioitinh 1)}}selected{{/if}}>Nữ</option>
+                        <option value="0" {{#if (compare user.gender 0)}}selected{{/if}}>Nam</option>
+                        <option value="1" {{#if (compare user.gender 1)}}selected{{/if}}>Nữ</option>
                       </select>
-                      <label class="form-label" for="gioitinh">Giới tính</label>
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="birthday">Năm sinh</label>
                       <input
                         type="date"
-                        id="ngaysinh"
+                        id="birthday"
                         class="form-control"
-                        name="ngaysinh"
-                        value="{{user.ngaysinh}}"
+                        name="birthday"
+                        value="{{user.birthday}}"
                         required
                       />
-                      <label class="form-label" for="ngaysinh">Năm sinh</label>
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="hometown">Quê quán</label>
                       <input
                         type="text"
-                        id="quequan"
+                        id="hometown"
                         class="form-control"
-                        name="quequan"
-                        value="{{user.quequan}}"
+                        name="hometown"
+                        value="{{user.hometown}}"
                         required
                       />
-                      <label class="form-label" for="quequan">Quê quán</label>
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="password">Mật khẩu</label>
                       <input
                         type="password"
                         id="password"
@@ -98,13 +99,14 @@
                         name="password"
                         required
                       />
-                      <label class="form-label" for="password">Mật khẩu</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="repeatPassword">Nhập lại
+                        mật khẩu</label>
                       <input
                         type="password"
                         id="repeatPassword"
@@ -112,13 +114,11 @@
                         name="repeatPassword"
                         required
                       />
-                      <label class="form-label" for="repeatPassword">Nhập lại
-                        mật khẩu</label>
+                      
                       <p id="errorPassword" class="d-none text-danger">Mật khẩu
                         không khớp</p>
                     </div>
                   </div>
-
                   <div class="form-check d-flex justify-content-center mb-5">
                     <input
                       class="form-check-input me-2"
@@ -132,16 +132,13 @@
                       <a href="#!">Terms of service</a>
                     </label>
                   </div>
-
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button
                       type="submit"
                       class="btn btn-primary btn-lg"
                     >Register</button>
                   </div>
-
                 </form>
-
               </div>
               <div
                 class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"

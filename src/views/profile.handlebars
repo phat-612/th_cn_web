@@ -18,7 +18,7 @@
               />
               <form
                 hidden
-                action="avatar?_method=PATCH"
+                action="/api/avatar?_method=PATCH"
                 method="post"
                 enctype="multipart/form-data"
               >
@@ -29,7 +29,7 @@
                   class="btn btn-info"
                 ></button>
               </form>
-              <h5>{{user.hoten}}</h5>
+              <h5>{{user.name}}</h5>
               <p>{{showRole user.role}}</p>
               <a href="/logout">Đăng xuất</a>
               <i class="far fa-edit mb-5"></i>
@@ -42,28 +42,19 @@
                   <div class="col-6 mb-3">
                     <h6>Giới tính</h6>
                     <p class="text-muted">
-                      {{showGioiTinh user.gioitinh}}
+                      {{showGioiTinh user.gender}}
                     </p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Ngày sinh</h6>
-                    <p class="text-muted">{{user.ngaysinh}}</p>
+                    <p class="text-muted">{{formatDate
+                        user.birthday
+                        "DD/MM/YYYY"
+                      }}</p>
                   </div>
                   <div class="col-12 mb-3">
                     <h6>Quê quán</h6>
-                    <p class="text-muted">{{user.quequan}}</p>
-                  </div>
-                  <div class="col-4 mb-3">
-                    <h6>Điểm hội viên</h6>
-                    <p class="text-muted">{{user.userScore}}</p>
-                  </div>
-                  <div class="col-4 mb-3">
-                    <h6>Điểm admin</h6>
-                    <p class="text-muted">{{user.adminScore}}</p>
-                  </div>
-                  <div class="col-4 mb-3">
-                    <h6>Trạng thái</h6>
-                    <p class="text-muted">{{user.status}}</p>
+                    <p class="text-muted">{{user.hometown}}</p>
                   </div>
                   <div class="col-12 d-flex mb-3 justify-content-between gap-1">
                     <button
@@ -81,6 +72,8 @@
                     {{else}}
                       <a href="/admin/member" class="btn btn-info">Danh sách hội
                         viên</a>
+                      <a href="/admin/standard" class="btn btn-info">Danh sách
+                        tiêu chí</a>
                     {{/if}}
 
                   </div>
@@ -108,11 +101,11 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form action="password?_method=PATCH" method="post">
+        <form action="/api/password?_method=PATCH" method="post">
           <div class="mb-3">
             <label for="oldPassword" class="col-form-label">Mật khẩu cũ</label>
             <input
-              type="text"
+              type="password"
               class="form-control"
               id="oldPassword"
               name="oldPassword"
@@ -121,7 +114,7 @@
           <div class="mb-3">
             <label for="newPassword" class="col-form-label">Mật khẩu mới</label>
             <input
-              type="text"
+              type="password"
               class="form-control"
               id="newPassword"
               name="newPassword"
@@ -131,7 +124,7 @@
             <label for="repeatNewPassword" class="col-form-label">Nhập lại mật
               khẩu mới</label>
             <input
-              type="text"
+              type="password"
               class="form-control"
               id="repeatNewPassword"
               name="repeatNewPassword"
@@ -165,44 +158,44 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form action="profile?_method=PATCH" method="post">
+        <form action="/api/profile?_method=PATCH" method="post">
           <div class="mb-3">
-            <label for="hoten" class="col-form-label">Họ tên</label>
+            <label for="name" class="col-form-label">Họ tên</label>
             <input
               type="text"
               class="form-control"
-              id="hoten"
-              name="hoten"
-              value="{{user.hoten}}"
+              id="name"
+              name="name"
+              value="{{user.name}}"
               required
             />
           </div>
           <div class="mb-3">
-            <label for="gioitinh" class="col-form-label">Giới tính</label>
-            <select class="form-select" id="gioitinh" name="gioitinh" required>
-              <option value="0" {{selectGioiTinh user.gioitinh 0}}>Nam</option>
-              <option value="1" {{selectGioiTinh user.gioitinh 1}}>Nữ</option>
+            <label for="gender" class="col-form-label">Giới tính</label>
+            <select class="form-select" id="gender" name="gender" required>
+              <option value="0" {{selectGioiTinh user.gender 0}}>Nam</option>
+              <option value="1" {{selectGioiTinh user.gender 1}}>Nữ</option>
             </select>
           </div>
           <div class="mb-3">
-            <label for="ngaysinh" class="col-form-label">Ngày sinh</label>
+            <label for="birthday" class="col-form-label">Ngày sinh</label>
             <input
               type="date"
               class="form-control"
-              id="ngaysinh"
-              name="ngaysinh"
-              value="{{user.ngaysinh}}"
+              id="birthday"
+              name="birthday"
+              value="{{user.birthday}}"
               required
             />
           </div>
           <div class="mb-3">
-            <label for="quequan" class="col-form-label">Quê quán</label>
+            <label for="hometown" class="col-form-label">Quê quán</label>
             <input
               type="text"
               class="form-control"
-              id="quequan"
-              name="quequan"
-              value="{{user.quequan}}"
+              id="hometown"
+              name="hometown"
+              value="{{user.hometown}}"
               required
             />
           </div>

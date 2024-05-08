@@ -17,21 +17,25 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "https://www.w3schools.com/howto/img_avatar.png",
   },
-  hoten: {
+  name: {
     type: String,
     required: true,
   },
-  gioitinh: {
+  gender: {
+    type: Boolean,
+    required: true,
+  },
+  birthday: {
+    type: Date,
+    required: true,
+  },
+  hometown: {
     type: String,
     required: true,
   },
-  ngaysinh: {
-    type: String,
-    required: true,
-  },
-  quequan: {
-    type: String,
-    required: true,
+  active: {
+    type: Boolean,
+    default: false,
   },
 });
 
