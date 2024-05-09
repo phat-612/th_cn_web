@@ -7,7 +7,7 @@ const { drive } = require("../../helper/db");
 
 const Standard = require("../model/Standard");
 const User = require("../model/User");
-const Session = require("../model/Session111");
+const Session = require("../model/Session");
 const { default: mongoose } = require("mongoose");
 class ApiController {
   // api user
@@ -162,14 +162,18 @@ class ApiController {
     });
   }
   updateRole(req, res) {
-    Session.findOne({ idUser: req.query.idUser }).then((session) => {
-      console.log(session);
-    });
-    User.updateOne({ _id: req.query.idUser }, { role: req.query.role }).then(
-      () => {
-        res.json({ message: "success" });
+    Session.updateMany(
+      { "session.idUser": req.query.idUser },
+      {
+        "session.role": req.query.role,
       }
-    );
+    ).then(() => {
+      User.updateOne({ _id: req.query.idUser }, { role: req.query.role }).then(
+        () => {
+          res.json({ message: "success" });
+        }
+      );
+    });
   }
   // end api user
   // api admin

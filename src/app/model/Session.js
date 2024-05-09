@@ -5,6 +5,9 @@ const sessionSchema = new mongoose.Schema({
     idUser: {
       type: mongoose.Schema.Types.ObjectId,
     },
+    role: {
+      type: Number,
+    },
   },
 });
 const Session = mongoose.model("Session", sessionSchema);
