@@ -8,6 +8,7 @@ const { drive } = require("../../helper/db");
 const Standard = require("../model/Standard");
 const User = require("../model/User");
 const Session = require("../model/Session");
+const Review = require("../model/Review");
 const { default: mongoose } = require("mongoose");
 class ApiController {
   // api user
@@ -225,6 +226,85 @@ class ApiController {
       { $pull: { criterias: { _id: req.query.idCriteria } } }
     ).then(() => {
       res.redirect("/admin/standard");
+    });
+  }
+  createReview(req, res) {
+    const formData = req.body;
+    Standard.find({}).then((standards) => {
+      let dataCreate = {
+        name: formData.name,
+        desc: formData.desc,
+        standards,
+        reviews: [],
+      };
+      const newReview = new Review(dataCreate);
+      newReview
+        .save()
+        .then(() => {
+          res.redirect("/admin/showReview");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
+  }
+  sendReview(req, res) {
+    const formData = req.body;
+    const idUser = req.session.idUser;
+    Review.findOne({ status: true }).then((review) => {
+      const standards = review.standards.toObject();
+      const userDetails = formData.details;
+      const total = standards.reduce((total, standard, indStandard) => {
+        const totalCriteria = standard.criterias.reduce(
+          (totalCriteria, criteria, indCriteria) => {
+            if (userDetails[indStandard][indCriteria] == "true") {
+              return totalCriteria + criteria.score;
+            }
+            return totalCriteria;
+          },
+          0
+        );
+        return total + totalCriteria;
+      }, 0);
+
+      const exist = review.reviews.find(
+        (item) => item.idUser.toString() == idUser
+      );
+      if (!exist) {
+        review.reviews.push({
+          total,
+          idUser,
+          details: formData.details,
+        });
+      } else {
+        review.reviews = review.reviews.map((item) => {
+          if (item.idUser.toString() == idUser.toString()) {
+            item.total = total;
+            item.details = formData.details;
+          }
+          return item;
+        });
+      }
+      review.save().then(() => {
+        res.redirect("/profile");
+      });
+    });
+  }
+  endReview(req, res) {
+    Review.updateOne({ status: true }, { status: false }).then(() => {
+      res.redirect("/admin/showReview");
+    });
+  }
+  trueReview(req, res) {
+    Review.updateOne(
+      {
+        "reviews._id": req.body.idUserReview,
+      },
+      {
+        "reviews.$.status": true,
+      }
+    ).then(() => {
+      res.redirect("/admin/showReview");
     });
   }
   //   test

@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="text-center">Chi tiết bản đánh giá</h1>
+  
+  <div>
+    <div class="fs-5">
+     <p>Họ tên: <span class="fw-bold ">{{user.name}}</span></p>
+     <p>Tổng điểm: <span class="fw-bold ">{{user.total}}</span></p>
+    </div>
+    <div class="row fw-bold fs-4 text-center mb-3">
+      <div class="col">Tiêu chuẩn</div>
+      <div class="col">Tiêu chí</div>
+      <div class="col-2">Điểm</div>
+      <div class="col-2">Đánh giá</div>
+    </div>
+    {{#each detailReview}}
+      <div class="row mt-4 fs-5 align-items-center">
+        <div class="col"><label
+            for="standard{{@index}}"
+          >{{name}}</label></div>
+        <div class="col"></div>
+        <div class="col-2 text-center">{{getTotalScore this.criterias}}</div>
+        <div class="col-2 text-center">
+        </div>
+      </div>
+      {{#each criterias}}
+        <div class="row mt-1 fs-5 align-items-center">
+          <div class="col"></div>
+          <div class="col"><label
+              for="criteria{{@../index}}-{{@index}}"
+            >{{name}}</label></div>
+          <div class="col-2 text-center">{{score}}</div>
+          <div class="col-2 text-center">
+              <input type="checkbox" id="criteria{{@../index}}-{{@index}}" name="details[{{@../index}}][]" {{checkCheckbox status}} disabled/>
+          </div>
+        </div>
+      {{/each}}
+    {{/each}}
+
+      <div class="d-flex flex-row-reverse mt-3 gap-3">
+        <a class="btn btn-primary " href="javascript: history.back()">Quay lại</a>
+        {{#if (negate status)}}
+          <form class="d-inline-block m-0" action="/api/trueReview" method="post">
+            <button type="submit" class="btn btn-primary">Duyệt</button>
+            <input type="text" name="idUserReview" value="{{idUserReview}}" hidden />
+          </form>
+        {{/if}}
+      </div>
+  </div>
+</div>

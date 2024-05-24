@@ -1,11 +1,22 @@
 <div class="container">
   <h1 class="text-center">Quản lý tiêu chí đánh giá</h1>
-  <button
-    class="btn btn-primary float-end"
-    data-bs-toggle="modal"
-    data-bs-target="#standardModal"
-    data-bs-action="add"
-  >Thêm tiêu chuẩn</button>
+  <div class="d-flex flex-row-reverse gap-3">
+    <a class="btn-primary btn" href="/profile">Profile</a>
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#standardModal"
+      data-bs-action="add"
+    >Thêm tiêu chuẩn
+    </button>
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#createReviewModal"
+    >Tạo đợt đánh giá
+    </button>
+  </div>
+
   <table class="table">
     <thead>
       <tr class="fs-4">
@@ -193,6 +204,53 @@
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+{{! tạo đợt đánh giá mới }}
+<div
+  class="modal fade"
+  id="createReviewModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="standardModalLabel">Tạo đợt đánh giá mới</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="/api/createReview" id="standardForm" method="post">
+          <div class="mb-3">
+            <label for="name" class="col-form-label">Tên đánh giá</label>
+            <input type="text" class="form-control" id="name" name="name" />
+          </div>
+          <div class="mb-3">
+            <label for="desc" class="col-form-label">Mô tả</label>
+            <input type="text" class="form-control" id="desc" name="desc" />
+          </div>
+          <div class="float-end">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Close</button>
+            <button
+              type="submit"
+              id="btnSubmitStandardForm"
+              class="btn btn-primary"
+            >Tạo</button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

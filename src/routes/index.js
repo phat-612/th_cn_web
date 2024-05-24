@@ -21,15 +21,39 @@ router.get("/register", isLoggedIn, UserController.showRegister);
 router.get("/login", isLoggedIn, UserController.showLogin);
 router.get("/logout", UserController.logout);
 router.get("/profile", checkLogin, UserController.showProfile);
+router.get("/sendReview", checkLogin, UserController.sendReview);
+router.get(
+  "/historyReview/:idReview?",
+  checkLogin,
+  UserController.historyReview
+);
 // get admin
 router.get("/admin/standard", checkLoginAdmin, AdminController.showStandard);
 router.get("/admin/member", checkLoginAdmin, AdminController.showUser);
+router.get(
+  "/admin/showReview/:idReview?",
+  checkLoginAdmin,
+  AdminController.showReview
+);
+router.get(
+  "/detailUserReview/:idUserReview",
+  checkLoginAdmin,
+  AdminController.detailUserReview
+);
+router.get(
+  "/admin/showReviewStandard/:idReview",
+  AdminController.showReviewStandard
+);
 // post
 router.post("/api/register", ApiController.storeUser);
 router.post("/api/login", ApiController.authLogin);
+router.post("/api/sendReview", checkLogin, ApiController.sendReview);
 // post admin
 router.post("/api/standard", checkLoginAdmin, ApiController.storeStandard);
 router.post("/api/criteria", checkLoginAdmin, ApiController.storeCriteria);
+router.post("/api/createReview", checkLoginAdmin, ApiController.createReview);
+router.post("/api/endReview", checkLoginAdmin, ApiController.endReview);
+router.post("/api/trueReview", checkLoginAdmin, ApiController.trueReview);
 // patch
 router.patch("/api/password", checkLogin, ApiController.changePassword);
 router.patch(
@@ -49,9 +73,9 @@ router.delete("/api/standard", checkLoginAdmin, ApiController.deleteStandard);
 router.delete("/api/criteria", checkLoginAdmin, ApiController.deleteCriteria);
 // test
 router.post("/test/themDLTieuChuan", ApiController.themDLTieuChuan);
-router.post("api/showData", (req, res) => {
+router.post("/api/showData", (req, res) => {
   console.log("---------------------------");
-  res.json(req.body);
+  res.send(req.body);
   console.log("---------------------------");
 });
 // Export the router

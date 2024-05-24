@@ -68,14 +68,18 @@
                       data-bs-target="#doiTTModal"
                     >Cập nhật thông tin</button>
                     {{#if (compare user.role 1)}}
-                      <a href="/evaluate" class="btn btn-info">Nộp bảng đánh giá</a>
+                      <a href="/sendReview" class="btn btn-info">Nộp bảng đánh
+                        giá</a>
+                      <a href="/historyReview" class="btn btn-info">Lịch sử đánh
+                        giá</a>
                     {{else}}
                       <a href="/admin/member" class="btn btn-info">Danh sách hội
                         viên</a>
                       <a href="/admin/standard" class="btn btn-info">Danh sách
                         tiêu chí</a>
+                      <a href="/admin/showReview" class="btn btn-info">Xem đánh
+                        giá</a>
                     {{/if}}
-
                   </div>
                 </div>
               </div>
@@ -184,7 +188,7 @@
               class="form-control"
               id="birthday"
               name="birthday"
-              value="{{user.birthday}}"
+              value="{{formatDate user.birthday 'YYYY-MM-DD'}}"
               required
             />
           </div>

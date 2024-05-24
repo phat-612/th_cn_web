@@ -1,0 +1,52 @@
+<div class="container">
+  <h1 class="text-center">Gửi bảng đánh giá</h1>
+  <div class="fs-5">
+     <p>Tên đánh giá: <span class="fw-bold ">{{review.name}}</span></p>
+     <p>Mô tả: <span class="fw-bold ">{{review.desc}}</span></p>
+  </div>
+  <div>
+    <div class="row fw-bold fs-4 text-center mb-3">
+      <div class="col">Tiêu chuẩn</div>
+      <div class="col">Tiêu chí</div>
+      <div class="col-2">Điểm</div>
+      <div class="col-2">Đánh giá</div>
+    </div>
+    <form action="/api/sendReview" method="post">
+      {{#each review.standards}}
+        <div class="row mt-4 fs-5 align-items-center">
+          <div class="col"><label
+              for="standard{{@index}}"
+            >{{name}}</label></div>
+          <div class="col"></div>
+          <div class="col-2 text-center">{{getTotalScore this.criterias}}</div>
+          <div class="col-2 text-center">
+            
+          </div>
+        </div>
+        {{#each criterias}}
+          <div class="row mt-1 fs-5 align-items-center">
+            <div class="col"></div>
+            <div class="col"><label
+                for="criteria{{@../index}}-{{@index}}"
+              >{{name}}</label></div>
+            <div class="col-2 text-center">{{score}}</div>
+            <div class="col-2 text-center">
+                <input type="checkbox" name="details[{{@../index}}][]" value="false" checked hidden/>
+                <input type="checkbox" id="criteria{{@../index}}-{{@index}}" name="details[{{@../index}}][]" value="true" />
+            </div>
+          </div>
+        {{/each}}
+      {{/each}}
+      <div class="text-end mt-5">
+        <button type="submit" class="btn btn-primary">Gửi bảng đánh giá</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  
+   $("input[type='checkbox']:visible").on("change", function() {
+    $(this).siblings("input[type='checkbox']").prop("checked", !$(this).siblings("input[type='checkbox']").prop("checked"));
+    });
+
+</script>

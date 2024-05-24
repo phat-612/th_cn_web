@@ -1,0 +1,34 @@
+<div class="container">
+  <h1 class="text-center">Chi tiết tiêu chuẩn</h1>
+  <div class="fs-5">
+     <p>Tên đánh giá: <span class="fw-bold ">{{review.name}}</span></p>
+     <p>Mô tả: <span class="fw-bold ">{{review.desc}}</span></p>
+  </div>
+  <div>
+    <div class="row fw-bold fs-4 text-center mb-3">
+      <div class="col">Tiêu chuẩn</div>
+      <div class="col">Tiêu chí</div>
+      <div class="col-2">Điểm</div>
+    </div>
+    {{#each review.standards}}
+      <div class="row mt-4 fs-5 align-items-center">
+        <div class="col"><label
+            for="standard{{@index}}"
+          >{{name}}</label></div>
+        <div class="col"></div>
+        <div class="col-2 text-center">{{getTotalScore this.criterias}}</div>
+        
+      </div>
+      {{#each criterias}}
+        <div class="row mt-1 fs-5 align-items-center">
+          <div class="col"></div>
+          <div class="col"><label
+              for="criteria{{@../index}}-{{@index}}"
+            >{{name}}</label></div>
+          <div class="col-2 text-center">{{score}}</div>
+        </div>
+      {{/each}}
+    {{/each}}
+    <div class="d-flex flex-row-reverse mt-3"><a class="btn btn-primary " href="javascript: history.back()">Quay lại</a></div>
+  </div>
+</div>

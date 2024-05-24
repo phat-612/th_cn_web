@@ -1,0 +1,72 @@
+<div class="container">
+  <h1 class="text-center">Quản lý đánh giá</h1>
+
+  <div class="nav gap-3">
+    <form class="m-0 w-25" method="get">
+      <select class="form-select" name="" id="">
+        {{#each reviews}}
+          <option value="{{_id}}" {{selectedOption _id ../curReview._id}}>{{name}}
+            -
+            {{getStatusReview status}}</option>
+        {{/each}}
+      </select>
+    </form>
+    <a href="/admin/showReviewStandard/{{curReview._id}}" class="btn-primary btn">Xem tiêu chuẩn đánh giá</a>
+    <a href="/admin/standard" class="btn-primary btn">Tạo đánh giá mới</a>
+    {{#if curReview.status}}
+      <form class="m-0" action="/api/endReview" method="post">
+        <button class="btn-primary btn">Kết thúc đánh giá</button>
+        <input type="text" name="idReview" value="{{curReview._id}}" hidden />
+      </form>
+    {{/if}}
+    <a class="btn btn-primary " href="/profile">Trang profile</a>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><input type="checkbox" name="" id="" /></th>
+        <th scope="col">STT</th>
+        <th scope="col">Tài khoản</th>
+        <th scope="col">Họ tên</th>
+        <th scope="col">Ngày sinh</th>
+        <th scope="col">Giới tính</th>
+        <th scope="col">Điểm</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td><input type="checkbox" name="" id="" /></td>
+          <td>{{showSTT @index}}</td>
+          <td>{{username}}</td>
+          <td>{{name}}</td>
+          <td>{{formatDate birthday "DD/MM/YYYY"}}</td>
+          <td>{{getGender gender}}</td>
+          <td>{{showTotalScore total}}</td>
+          <td>{{getStatusReviewUser status}}</td>
+          <td>
+            {{#if total}}
+              <a href="/detailUserReview/{{idUserReview}}" class="btn btn-success">Xem chi tiết</a>
+              {{#if (negate status)}}
+                <form class="d-inline-block m-0" action="/api/trueReview" method="post">
+                  <button type="submit" class="btn btn-primary">Duyệt</button>
+                  <input type="text" name="idUserReview" value="{{idUserReview}}" hidden />
+                </form>
+              {{/if}}
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<script>
+  $("select").on("change", (e)=>{
+    let select = $(e.target);
+    let form = select.closest("form");
+    form.attr("action", `/admin/showReview/${select.val()}`);
+    form.submit();
+  })
+</script>

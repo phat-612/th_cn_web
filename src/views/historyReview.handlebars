@@ -1,0 +1,57 @@
+<div class="container">
+  <h1 class="text-center">Chi tiết bản đánh giá</h1>
+  <form class="m-0 w-25" method="get">
+    <select class="form-select" name="" id="">
+      {{#each reviews}}
+        <option value="{{_id}}" {{selectedOption _id ../curReview._id}}>{{name}}
+          -
+          {{getStatusReview status}}</option>
+      {{/each}}
+    </select>
+    {{#if status}}
+      <p >Trạng thái: <span class="text-danger">đã được phê duyệt</span></p>
+    {{else}}
+      <p>Trạng thái: <span class="text-danger">chưa được phê duyệt</spant</p>
+    {{/if}}
+  </form>
+  <div>
+    <div class="row fw-bold fs-4 text-center mb-3">
+      <div class="col">Tiêu chuẩn</div>
+      <div class="col">Tiêu chí</div>
+      <div class="col-2">Điểm</div>
+      <div class="col-2">Đánh giá</div>
+    </div>
+    {{#each details}}
+      <div class="row mt-4 fs-5 align-items-center">
+        <div class="col"><label
+            for="standard{{@index}}"
+          >{{name}}</label></div>
+        <div class="col"></div>
+        <div class="col-2 text-center">{{getTotalScore this.criterias}}</div>
+        <div class="col-2 text-center">
+        </div>
+      </div>
+      {{#each criterias}}
+        <div class="row mt-1 fs-5 align-items-center">
+          <div class="col"></div>
+          <div class="col"><label
+              for="criteria{{@../index}}-{{@index}}"
+            >{{name}}</label></div>
+          <div class="col-2 text-center">{{score}}</div>
+          <div class="col-2 text-center">
+              <input type="checkbox" id="criteria{{@../index}}-{{@index}}" name="details[{{@../index}}][]" {{checkCheckbox status}} disabled/>
+          </div>
+        </div>
+      {{/each}}
+    {{/each}}
+    <div class="d-flex flex-row-reverse mt-3"><a class="btn btn-primary " href="javascript: history.back()">Quay lại</a></div>
+  </div>
+</div>
+<script>
+   $("select").on("change", (e)=>{
+    let select = $(e.target);
+    let form = select.closest("form");
+    form.attr("action", `/historyReview/${select.val()}`);
+    form.submit();
+  })
+</script>
