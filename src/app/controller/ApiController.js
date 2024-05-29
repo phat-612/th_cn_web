@@ -231,6 +231,13 @@ class ApiController {
   createReview(req, res) {
     const formData = req.body;
     Standard.find({}).then((standards) => {
+      if (standards.length == 0) {
+        req.flash("message", {
+          type: "danger",
+          message: "Chưa có tiêu chuẩn nào",
+        });
+        return res.redirect("/admin/standard");
+      }
       let dataCreate = {
         name: formData.name,
         desc: formData.desc,

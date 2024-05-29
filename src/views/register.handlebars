@@ -9,9 +9,7 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
                 {{#if errorMessage}}
-                  <p
-                    class="text-center h4 fw-bold text-danger"
-                  >{{errorMessage}}</p>
+                <p class="text-center h4 fw-bold text-danger">{{errorMessage}}</p>
                 {{/if}}
                 <form class="mx-1 mx-md-4" action="/api/register" method="post">
 
@@ -19,14 +17,8 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="username">Tài khoản</label>
-                      <input
-                        type="text"
-                        id="username"
-                        class="form-control"
-                        name="username"
-                        value="{{user.username}}"
-                        required
-                      />
+                      <input type="text" id="username" class="form-control" name="username" value="{{user.username}}"
+                        required />
                     </div>
                   </div>
 
@@ -34,27 +26,15 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="name">Họ và tên</label>
-                      <input
-                        type="text"
-                        id="name"
-                        class="form-control"
-                        name="name"
-                        value="{{user.name}}"
-                        required
-                      />
+                      <input type="text" id="name" class="form-control" name="name" value="{{user.name}}" required />
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="gender">Giới tính</label>
-                      <select
-                        class="form-select"
-                        id="gender"
-                        aria-label="Default select example"
-                        name="gender"
-                        required
-                      >
+                      <select class="form-select" id="gender" aria-label="Default select example" name="gender"
+                        required>
                         <option value="0" {{#if (compare user.gender 0)}}selected{{/if}}>Nam</option>
                         <option value="1" {{#if (compare user.gender 1)}}selected{{/if}}>Nữ</option>
                       </select>
@@ -64,41 +44,23 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="birthday">Năm sinh</label>
-                      <input
-                        type="date"
-                        id="birthday"
-                        class="form-control"
-                        name="birthday"
-                        value="{{user.birthday}}"
-                        required
-                      />
+                      <input type="date" id="birthday" class="form-control" name="birthday" value="{{user.birthday}}"
+                        required />
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="hometown">Quê quán</label>
-                      <input
-                        type="text"
-                        id="hometown"
-                        class="form-control"
-                        name="hometown"
-                        value="{{user.hometown}}"
-                        required
-                      />
+                      <input type="text" id="hometown" class="form-control" name="hometown" value="{{user.hometown}}"
+                        required />
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="password">Mật khẩu</label>
-                      <input
-                        type="password"
-                        id="password"
-                        class="form-control"
-                        name="password"
-                        required
-                      />
+                      <input type="password" id="password" class="form-control" name="password" required />
                     </div>
                   </div>
 
@@ -107,48 +69,27 @@
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="repeatPassword">Nhập lại
                         mật khẩu</label>
-                      <input
-                        type="password"
-                        id="repeatPassword"
-                        class="form-control"
-                        name="repeatPassword"
-                        required
-                      />
-                      
+                      <input type="password" id="repeatPassword" class="form-control" name="repeatPassword" required />
                       <p id="errorPassword" class="d-none text-danger">Mật khẩu
                         không khớp</p>
                     </div>
                   </div>
                   <div class="form-check d-flex justify-content-center mb-5">
-                    <input
-                      class="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="agreement"
-                      required
-                    />
+                    <input class="form-check-input me-2" type="checkbox" value="" id="agreement" required />
                     <label class="form-check-label" for="agreement">
                       I agree all statements in
                       <a href="#!">Terms of service</a>
                     </label>
                   </div>
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-lg"
-                    >Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>
                 </form>
               </div>
-              <div
-                class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
-              >
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                  class="img-fluid"
-                  alt="Sample image"
-                />
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image" />
 
               </div>
             </div>
@@ -159,10 +100,18 @@
   </div>
 </section>
 <script>
-  $(document).ready(function () { $('#repeatPassword').on('keyup', function () {
-  if ($('#password').val() == $('#repeatPassword').val()) {
-  $('#errorPassword').addClass('d-none'); } else {
-  $('#errorPassword').removeClass('d-none'); } }); }); $('form').submit(function
-  (e) { if ($('#password').val() != $('#repeatPassword').val()) {
-  e.preventDefault(); $('#errorPassword').removeClass('d-none'); } })
+  $(document).ready(function () {
+    $('#repeatPassword').on('keyup', function () {
+      if ($('#password').val() == $('#repeatPassword').val()) {
+        $('#errorPassword').addClass('d-none');
+      } else {
+        $('#errorPassword').removeClass('d-none');
+      }
+    });
+  }); $('form').submit(function
+    (e) {
+      if ($('#password').val() != $('#repeatPassword').val()) {
+        e.preventDefault(); $('#errorPassword').removeClass('d-none');
+      }
+  })
 </script>
